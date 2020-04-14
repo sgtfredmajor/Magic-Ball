@@ -5,15 +5,16 @@ import React, { Component } from "react";
 class MagicBall extends Component {
   state = {
     value: "",
-    questions: []
+    questions: ""
   };
   
   handleSubmit = async event => {
-    const { questions } = this.state;
+    event.preventDefault();
+    const { question } = this.state;
     const response = await fetch(
-      `https://8ball.delegator.com/magic/JSON/'${questions}'`
+      `https://8ball.delegator.com/magic/JSON/'${question}'`
       );
-
+      
     const ballAnswer = await response.json();
        this.setState({
       userAnswer: ballAnswer.magic.answer,
@@ -21,7 +22,7 @@ class MagicBall extends Component {
 };
 
 render() {
-  const { userAnswers } = this.state;
+  const { userAnswer } = this.state;
   return (
     <div>
       <form onSubmit={this.handleSubmit}>
@@ -35,8 +36,8 @@ render() {
     onChange={this.handleChange} 
     />
     </label>
-    <button type="Submit"></button>
-    <p>Answer: {userAnswers}</p>
+    <button type="submit"></button>
+    <p>Answer: {userAnswer}</p>
     </form>
     </div>
     );
