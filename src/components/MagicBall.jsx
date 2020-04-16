@@ -56,9 +56,9 @@ const Question = styled.p`
 class MagicBall extends Component {
   state = {
     value: '',
-    question: '',
+    question: ''
   };
-
+  
   handleChange = (e) => {
     this.setState({
       value: e.target.value,
