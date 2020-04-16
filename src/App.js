@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MagicBall from './components/MagicBall';
 import './App.css';
 

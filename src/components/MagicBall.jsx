@@ -1,6 +1,18 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import '../App.css';
+
+const RedEightBall = styled.div`
+  background-image: radial-gradient(circle, #428b8b, rgb(255, 0, 0));
+  margin: 100px auto;
+  width: 700px;
+  height: 700px;
+  max-width: 1000px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+`;
 
 const Input = styled.input`
   background-color: rgb(241, 236, 228);
@@ -14,14 +26,13 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background: green;
-  color: white;
+  background-color: rgb(241, 236, 228);
   font-color: black;
   font-size: 2rem;
   border: none;
   border-radius: 3.5px;
   margin 20px;
-  width: 100px;
+  width: 120px;
   height: 40px;
 
 &:focus {
@@ -29,31 +40,38 @@ const Button = styled.button`
 }
 `;
 
+
 const Reply = styled.p`
-  display: flex;
-  text-align: center;
-  font-size: 1.6rem;
+  font-size: 2rem;
 `;
 
 const Eight = styled.h1`
   font-size: 6rem;
-  text-align: center;
+  justify-content: center;
 `;
 
 const Question = styled.p`
   font-size: 2rem;
+  
 `;
 
 class MagicBall extends Component {
   state = {
     value: '',
-    questions: [],
+    question: '',
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      value: e.target.value,
+    });
   };
 
   handleSubmit = async (event) => {
-    const {questions} = this.state;
+    event.preventDefault();
+    const {question} = this.state;
     const response = await fetch(
-      `https://8ball.delegator.com/magic/JSON/'${questions}'`
+      `https://8ball.delegator.com/magic/JSON/'${question}'`
     );
 
     const ballAnswer = await response.json();
@@ -63,21 +81,23 @@ class MagicBall extends Component {
   };
 
   render() {
-    const {userAnswers} = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Eight>The Magic-8-Ball</Eight>
-        <Question>"Please ask a question"</Question>
+    const {userAnswer} = this.state;
 
-        <Input
-          type="text"
-          value={this.state.textInput}
-          placeholder="Enter Question:"
-          onChange={this.handleChange}
-        />
-        <Button type="Submit"></Button>
-        <Reply>Answer: {userAnswers}</Reply>
-      </form>
+    return (
+      <RedEightBall className="MagicBall">
+        <form onSubmit={this.handleSubmit}>
+          <Eight>Magic 8 Ball</Eight>
+          <Question> Ask a question!</Question>
+          <Input
+            type="text"
+            value={this.state.value}
+            placeholder="Enter Your Question"
+            onChange={this.handleChange}
+          />
+          <Button type="Submit">Shake</Button>
+          <Reply> {userAnswer} </Reply>
+        </form>
+      </RedEightBall>
     );
   }
 }
