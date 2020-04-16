@@ -40,19 +40,17 @@ const Button = styled.button`
 }
 `;
 
-
 const Reply = styled.p`
   font-size: 2rem;
 `;
 
 const Eight = styled.h1`
-  font-size: 6rem;
+  font-size: 5rem;
   justify-content: center;
 `;
 
 const Question = styled.p`
-  font-size: 2rem;
-  
+  font-size: 2.5rem;
 `;
 
 class MagicBall extends Component {
@@ -86,7 +84,7 @@ class MagicBall extends Component {
     return (
       <RedEightBall className="MagicBall">
         <form onSubmit={this.handleSubmit}>
-          <Eight>Magic 8 Ball</Eight>
+          <Eight>Big-Red Magic Ball</Eight>
           <Question> Ask a question!</Question>
           <Input
             type="text"
